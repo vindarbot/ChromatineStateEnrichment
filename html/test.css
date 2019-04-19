@@ -1,0 +1,60 @@
+header {
+
+
+	height: 80px;
+	background-color: #EEE;
+
+}
+
+h1 {
+
+	font-size: 180%;
+	font-family: "Optima";
+	display: inline-block;
+	margin-left: 1em;
+
+}
+
+table {
+
+	border-collapse: collapse;
+	font-size: 0.8em;
+	width:5px;
+	margin-left:auto; 
+    margin-right:auto;
+    border="1";
+    column-width: auto;
+}
+
+title {
+
+}
+
+
+td {
+    border: 1px solid #333;
+    text-align:center;
+    padding: 1.4em;
+}
+
+td.over {
+
+	color: #006400;
+
+}
+
+td.under{
+
+	color: #800000;
+}
+
+thead;
+
+
+tfoot {
+    background-color: #333;
+    color: #fff;
+}
+
+
+

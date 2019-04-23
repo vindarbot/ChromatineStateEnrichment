@@ -82,6 +82,26 @@ state	Preferential Epigenetics Marks		Preferential location\n\
 
 ### Definitions
 
+def rounding(chiffre):
+
+	if re.search("e",str(chiffre)):
+
+		start = re.compile("[0-9][.][0-9]{2}")
+		end = re.compile("e-[0-9]+")
+
+		return float("".join(start.findall(str(chiffre))+end.findall(str(chiffre))))
+
+	elif re.search("[0][.][0]{2}",str(chiffre)):
+
+		motif = re.compile("[0][.][0]+[0-9]{2}")
+
+		return float("".join(motif.findall(str(chiffre))))
+
+	else:
+
+		return chiffre
+
+
 def retrieve_input_genes(liste):
 	''' Récupérer les gènes ID TAIR à partir du fichier fournit par l'utilisateur'''
 
@@ -96,6 +116,8 @@ def retrieve_input_genes(liste):
 		# Récupérer le nom du fichier, ainsi que l'ensemble des ids au sein du fichier 
 		# fournit par l'utilisateur
 		return name, regex_TAIRID.findall(list_read)
+
+
 
 
 
@@ -126,7 +148,7 @@ def counting_target_per_state(genes,states):
 				# de cibles input pour le state en question de 1
 				if ligne[1] in genes:
 
-					target_input[int(ligne[0])].append(ligne[1])
+					target_input[int(ligne[0])].append([ligne[1],ligne[2],ligne[4]])
 
 	return target_background, target_input
 
@@ -151,6 +173,9 @@ def running_stat_part(target_background, genes_input, target_input):
 			# associé au test de fisher
 			oddsratio, pvalue = stats.fisher_exact([[len_genes_background,
 				target_background[state]], [len(genes_input), len(target_input[state])]])
+
+			pvalue = rounding(pvalue)
+			oddsratio = round(oddsratio,2)
 
 			state_results[state] = [pvalue,oddsratio,len_genes_background,
 				target_background[state],len(genes_input),
@@ -197,7 +222,7 @@ def counting_state_per_gene(target_input, signif_states):
 
 	for state, genes in target_input.items():
 
-		for gene in genes:
+		for gene in genes[0]:
 			gene_to_state[gene].append(state)
 
 
@@ -336,11 +361,11 @@ def write_output(name, outdir, signifs, gene_states, coordinates, target_input):
 
 				if i == 0 : 
 
-					file.write(str(gene)+"\t"+str(coordinate[i][2])+"\t"+str(coordinate[i][3])+"\n")
+					file.write(str(gene)+"\t"+str(coordinate[i][3])+"\t"+str(coordinate[i][4])+"\t"+str(coordinate[i][5])+"\n")
 
 				else:
 
-					file.write(" \t"+str(coordinate[i][0])+"\t"+str(coordinate[i][1])+"\t"+str(coordinate[i][2])+"\n")
+					file.write(" \t"+str(coordinate[i][0])+"\t"+str(coordinate[i][2])+"\t"+str(coordinate[i][3])+"\n")
 
 
 	with open(outdir+"state_to_genes.txt","w") as file:
@@ -351,7 +376,9 @@ def write_output(name, outdir, signifs, gene_states, coordinates, target_input):
 
 			for gene in genes:
 
-				file.write(gene+"\t")
+				for info in gene:
+
+					file.write(info+"\t")
 
 			file.write("\n")
 

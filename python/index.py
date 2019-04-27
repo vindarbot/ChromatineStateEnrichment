@@ -100,6 +100,8 @@ with tag('html'):
 
 				with tag('tbody'):
 
+
+
 					for state, infos in sorted(results.items(), key=lambda kv: (kv[1][7],kv[1][0])):
 
 						with tag('tr'):
@@ -126,9 +128,6 @@ with tag('html'):
 										with tag('td', klass='under'):
 
 											text(infos[i])
-
-
-
 
 
 

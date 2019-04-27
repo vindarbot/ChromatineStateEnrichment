@@ -157,7 +157,13 @@ with tag('html'):
 						with tag('td',klass='head'):
 
 							text(head)
+
+				count = 0
+
 				for gene in state_to_gene[state]:
+
+					
+
 					with tag('tr'):
 
 
@@ -165,9 +171,9 @@ with tag('html'):
 
 							if i == 0:
 
-								with tag('td'):
+								with tag('td', klass='genes_links'):
 
-									with tag('a',real='external',href='genes.html'):
+									with tag('a',real='external',href='genes.html#value='+gene[i], klass='links', id="gene_"+str(count)):
 
 										text(gene[i])
 
@@ -178,7 +184,9 @@ with tag('html'):
 						
 
 									text(gene[i])
+					count += 1
 
+		doc.asis("<script type='text/javascript' src='../javascript/states.js'></script>")
 
 result = doc.getvalue()
 

@@ -17,3 +17,5 @@ os.system("python3 python/index.py")
 for state in state_to_gene.keys():
 
 	os.system("python3 python/states.py --state "+str(state)+"")
+
+os.system("python3 python/genes.py")

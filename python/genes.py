@@ -9,8 +9,7 @@ from state_to_gene import state_to_gene
 from state_to_name import state_to_name
 from results import results
 from decimal import *
-import urllib.request
-contents = urllib.request.urlopen("http://example.com/foo/bar").read()
+
 
 
 doc, tag, text = Doc().tagtext()
@@ -24,6 +23,7 @@ with tag('html'):
 		doc.stag('meta', charset="utf-8")
 
 		doc.stag('link',rel='stylesheet', href='style.css')
+
 
 		with tag('title'):
 
@@ -77,20 +77,22 @@ with tag('html'):
 
 					text("Enter a gene TAIR ID")
 
-				doc.stag("input", type='text', placeholder='ex: AT1G101010', name='gene')
+				doc.stag("input", type='text', placeholder='ex: AT1G01010', name='gene_input', id='gene_input')
 
-				doc.stag("input", type='submit', value='Envoyer')
-
-
+				doc.stag("input", type='submit', value='Envoyer',name='submit_gene', id='submit_gene')
 
 
+		with tag('canvas',id="canvas",width="2400", height="1600"):
 
+			text("Désolé, votre navigateur ne supporte pas Canvas. Mettez-vous à jour.")
 
+		doc.asis("<script type='text/javascript' src='../javascript/states.js'></script>")
 
+		doc.asis("<script type='text/javascript' src='../javascript/coordinates.js'></script>")
+		
+		doc.asis("<script type='text/javascript' src='../javascript/infos_states.js'></script>")
 
-
-
-
+		doc.asis("<script type='text/javascript' src='../javascript/genes.js'></script>")
 
 
 

@@ -1,12 +1,10 @@
 
 
 body {
-	font-family: "Optima", Arial ;
+	font-family: "Optima", Arial;
 	margin: 0px;
 	padding: 0px;
 	background-color: #FDF5E6;
-
-
 }
 
 header {
@@ -36,12 +34,11 @@ li {
 }
 
 
-ul{
+ul {
 	display: flex;
 	margin: 0px;
 	padding: 0px;
 	justify-content: space-around;
-
 }
 
 a.nav {
@@ -49,35 +46,33 @@ a.nav {
 	display: inline-block;
 	padding-left: 30px;
 	padding-right: 60px;
-	padding-top:20px;
+	padding-top: 20px;
 }
 
 a.states {
-
 	display: inline-block;
 }
 
-}
+
 
 .table {
 	display: table;
 	margin: 0 auto;
-
 }
 
 table {
 	border-collapse: collapse;
 	margin-top: 30px;
 	font-size: 0.8em;
-	width:50%;
+	width: 50%;
 	height: 100px;
-	margin-left:auto; 
-    margin-right:auto;
+	margin-left: auto;
+    margin-right: auto;
 }
 
 td {
     border: 1px solid #333;
-    text-align:center;
+    text-align: center;
     white-space: nowrap;
     padding: 0.8em;
 }
@@ -93,7 +88,7 @@ td.over {
 	color: #006400;
 }
 
-td.under{
+td.under {
 	color: #800000;
 }
 
@@ -103,26 +98,29 @@ td.under{
 }
 
 input {
-
 }
 
-label{
-
+label {
 	margin-right: 20px;
 }
 
 
 .infos-background {
 	float: left;
-	margin-left:20%;
+	margin-left: 24%;
 	margin-right: 10%;
-	width: :50%;
 }
 
 .infos-input {
-
 	overflow: auto;
-	width: : 50%;
+
+}
+
+canvas {
+	display: block;
+	margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
 }
 
 /*

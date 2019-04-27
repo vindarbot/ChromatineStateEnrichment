@@ -223,9 +223,8 @@ def counting_state_per_gene(target_input, signif_states):
 	for state, genes in target_input.items():
 
 		for infos in genes:
-			print(infos[0])
-			gene_to_state[infos[0]].append(state)
 
+			gene_to_state[infos[0]].append(state)
 
 	return gene_to_state
 
@@ -385,17 +384,6 @@ def write_output(name, outdir, signifs, gene_states, coordinates, target_input):
 
 
 
-	with open('javascript/infos_states.js','wa') as infos:
-
-		infos.write('\n')
-		infos.write('state_to_sens = {')
-
-		for b in sorted(signifs.items(), key=lambda kv: (kv[1][7],kv[1][0])):
-
-			infos.write(str(b[0])+":"+'"'+str(b[1][7])+'",\n')
-
-		infos.write("};")
-
 
 	with open("python/name.py","w") as file:
 
@@ -413,11 +401,9 @@ def write_output(name, outdir, signifs, gene_states, coordinates, target_input):
 
 		file.write("results = "+str(signifs))
 
+	with open("javascript/results.js","w") as file:
 
-
-
-
-
+		file.write("results = "+str(signifs))
 
 
 

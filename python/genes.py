@@ -89,6 +89,8 @@ with tag('html'):
 		doc.asis("<script type='text/javascript' src='../javascript/states.js'></script>")
 
 		doc.asis("<script type='text/javascript' src='../javascript/coordinates.js'></script>")
+
+		doc.asis("<script type='text/javascript' src='../javascript/results.js'></script>")
 		
 		doc.asis("<script type='text/javascript' src='../javascript/infos_states.js'></script>")
 

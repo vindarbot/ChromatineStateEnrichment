@@ -85,6 +85,8 @@ function infosGene(nameGene,length,coord1,coord2) {
 
 function infosSignal(startGene,endGene,state,coord1,coord2) {
 
+	// alert(results[state][7])
+
 	var lengthSig = coord2-coord1,
 	lengthGene = endGene-startGene,
 	normFactor = 1000 / (2000 + lengthGene),
@@ -110,18 +112,29 @@ function infosSignal(startGene,endGene,state,coord1,coord2) {
 
 	}
 
-	context.strokeStyle = state_to_color[state];
-	context.lineWidth = 5;
+
+	context.lineWidth = 2;
 	context.beginPath();
 	context.lineCap = 'round';
-	context.moveTo(startSign, state_to_y[state]);  // 1er point
-	context.lineTo(endSign, state_to_y[state]); // 2e point
-	context.closePath();     // On relie le 5e au 1er
-	context.stroke();
+
+	if (results[state][7] == "over") {
+
+		context.fillStyle = state_to_color[state];
+		context.fillRect(startSign,state_to_y[state],endSign - startSign,5)
+
+	} else {
+
+		context.strokeStyle = state_to_color[state];
+		context.strokeRect(startSign,state_to_y[state],endSign - startSign,5)
+	}
+	// context.moveTo(startSign, state_to_y[state]);  // 1er point
+	// context.lineTo(endSign, state_to_y[state]); // 2e point
+	// context.closePath();     // On relie le 5e au 1er
+
 
 	context.font = "bold 8pt Optima,Arial";
-	//context.fillText(state_to_name[state], (startSign+endSign)/2, y+60);
-	context.fillText(state, (startSign+endSign)/2, state_to_y[state]+15);
+	context.fillStyle = "black";
+	context.fillText(state, (startSign+endSign-10)/2, state_to_y[state]+15);
 
 }
 
@@ -134,8 +147,15 @@ function makeLegend(states) {
 	context = canvas.getContext('2d');
 
 
-	context.strokeRect(200, 600, 100, 10);
-	context.fillRect(200, 630, 100, 10);
+
+	context.lineWidth = 3;
+
+	context.strokeRect(200, 630, 100, 10);
+	context.fillRect(200, 600, 100, 10);
+
+	context.font = "bold 18pt Optima,Arial";
+	context.fillText("state over",320,610)
+	context.fillText("state under",320,640)
 
 
 
@@ -157,7 +177,7 @@ function makeLegend(states) {
 		}
 
 		context.fillStyle = "black";
-		context.font = "bold 16pt Optima,Arial";
+		
 
 		if (index > 8) {
 			context.fillText(state + "  :  "+ state_to_name[state], 1300, yB+30);
@@ -172,7 +192,6 @@ function makeLegend(states) {
 
 		}
 	}
-
 }
 
 

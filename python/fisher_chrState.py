@@ -9,6 +9,7 @@ import random
 from argparse import RawTextHelpFormatter
 from collections import defaultdict
 from state_to_name import state_to_name
+from state_to_gene import state_to_gene
 from  At_all_genes import At_all_genes
 
 parser = argparse.ArgumentParser(description='test of overrepresentation of\
@@ -443,6 +444,14 @@ coordinates = retrieve_coordinates(gene_to_states,list(states_signif.keys()))
 write_output(name, args.output, final_results, gene_to_states, coordinates, input)
 
 
+
+os.system("python3 python/index.py")
+
+for state in state_to_gene.keys():
+
+	os.system("python3 python/states.py --state "+str(state)+"")
+
+os.system("python3 python/genes.py")
 
 
 

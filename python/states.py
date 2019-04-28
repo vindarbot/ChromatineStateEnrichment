@@ -171,7 +171,7 @@ with tag('html'):
 
 							if i == 0:
 
-								with tag('td', klass='genes_links'):
+								with tag('td', klass='states'):
 
 									with tag('a',real='external',href='genes.html#value='+gene[i], klass='links', id="gene_"+str(count)):
 
@@ -179,7 +179,7 @@ with tag('html'):
 
 							else:
 
-								with tag('td'):
+								with tag('td', klass='states'):
 
 						
 

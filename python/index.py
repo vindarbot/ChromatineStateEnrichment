@@ -139,6 +139,8 @@ with tag('html'):
 
 											text(infos[i])
 
+		doc.stag('img',src='../images/matrix.png',klass='matrix')
+
 
 
 

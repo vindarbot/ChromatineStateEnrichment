@@ -128,6 +128,13 @@ canvas {
     margin-top: 100px;
 }
 
+.matrix {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	margin-top: 100px;
+	border: solid 2px;
+}
 
 /*
 }

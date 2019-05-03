@@ -406,6 +406,10 @@ def write_output(name, outdir, signifs, gene_states, coordinates, target_input):
 
 		file.write("results = "+str(signifs))
 
+	with open('python/gene_to_states.py','w') as file:
+
+		file.write('gene_to_states ='+str(dict(gene_states)))
+
 
 
 

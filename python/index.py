@@ -29,6 +29,16 @@ with tag('html'):
 
 			text(name)
 
+		doc.stag('link', rel='stylesheet', type='text/css', href='../javascript/DataTables/datatables.min.css')
+		
+		doc.stag('script', type='text/javascript', src ='../javascript/DataTables/datatables.min.js')
+
+		with tag('script'):
+
+			text(''' 
+					$(document).ready( function () {
+   						$('#example').DataTable();
+						} );)''')
 		
 
 
@@ -77,7 +87,7 @@ with tag('html'):
 
 		with tag('section', klass='table'):
 
-			with tag('table'):
+			with tag('table', id='main_results'):
 
 				with tag('thead'):
 
@@ -128,6 +138,8 @@ with tag('html'):
 										with tag('td', klass='under'):
 
 											text(infos[i])
+
+
 
 
 

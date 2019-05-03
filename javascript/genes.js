@@ -63,7 +63,6 @@ function infosGene(nameGene,length,coord1,coord2) {
 	context.stroke();
 
 	context.strokeRect(startGene, y-10.5, length*normFactor, 20.5)
-
 	   // On relie le 5e au 1er
 
 	context.beginPath();
@@ -151,13 +150,19 @@ function makeLegend(states) {
 	context.lineWidth = 3;
 
 	context.strokeRect(200, 630, 100, 10);
-	context.fillRect(200, 600, 100, 10);
 
 	context.font = "bold 18pt Optima,Arial";
+
+	rect = new Path2D();
+	rect.rect(200, 600, 100, 10);
+
+
 	context.fillText("state over",320,610)
 	context.fillText("state under",320,640)
+	context.fill(rect);
 
 
+//	alert(context.isPointInPath(rect,201,605));
 
 	for (index in states) {
 

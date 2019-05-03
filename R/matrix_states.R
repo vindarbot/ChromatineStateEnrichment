@@ -1,9 +1,7 @@
 library(tidyverse)
 library(igraph)
 library(ggplot2)
-dir <- rstudioapi::getSourceEditorContext()$path
 
-setwd('~/Desktop/Chromatine_states/')
 matrix <- read.csv('results/matrix.txt',sep="\t",head=T)
 
 
@@ -15,7 +13,6 @@ freq <- combn(matrix[-1], 2, function(x) sum(x[1] * x[2]))
 
 matrix_adj <- data.frame(col1 = names[1,], col2 = names[2,], freq = freq)
 
-graph.adjacency(matrix_adj, mode="undirected", weighted=NULL)
 
 g <- graph.data.frame(matrix_adj)
 

@@ -449,6 +449,11 @@ write_output(name, args.output, final_results, gene_to_states, coordinates, inpu
 
 
 
+
+os.system("python3 python/matrix.py")
+
+os.system("Rscript R/matrix.R")
+
 os.system("python3 python/index.py")
 
 for state in state_to_gene.keys():

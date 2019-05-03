@@ -9,7 +9,6 @@ import random
 from argparse import RawTextHelpFormatter
 from collections import defaultdict
 from state_to_name import state_to_name
-from state_to_gene import state_to_gene
 from  At_all_genes import At_all_genes
 
 parser = argparse.ArgumentParser(description='test of overrepresentation of\
@@ -253,7 +252,7 @@ def retrieve_coordinates(gene_to_states, signif_states):
 			# On récupère ici les coordonnées des gènes ciblés par au moins une chromatine state significative
 			if ligne[1] in gene_to_states.keys() and ligne[1] not in coordinates_genes.keys():
 
-				coordinates_genes[ligne[1]].append(["gene",ligne[2],ligne[4],ligne[5],ligne[6],ligne[7]])
+				coordinates_genes[ligne[1]].append(["gene",ligne[2],ligne[4],ligne[5],ligne[6],ligne[7],ligne[8]])
 
 
 
@@ -452,9 +451,13 @@ write_output(name, args.output, final_results, gene_to_states, coordinates, inpu
 
 os.system("python3 python/matrix.py")
 
-os.system("Rscript R/matrix.R")
+os.system("Rscript R/matrix_states.R")
 
 os.system("python3 python/index.py")
+
+
+
+from state_to_gene import state_to_gene
 
 for state in state_to_gene.keys():
 

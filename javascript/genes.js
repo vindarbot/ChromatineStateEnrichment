@@ -37,12 +37,12 @@ function getValueForm() {
 
 
 
-function infosGene(nameGene,length,coord1,coord2) {
+function infosGene(nameGene,length,coord1,coord2,sens) {
 
 	var normFactor = 1000 / (2000 + length),
 	startGene = 100 + (1000*normFactor),
 	endGene = startGene + length*normFactor
-	y = 100;
+	y = 200;
 
 	var canvas = document.getElementById("canvas"),
 	context = canvas.getContext('2d');
@@ -79,6 +79,9 @@ function infosGene(nameGene,length,coord1,coord2) {
 	context.font = "bold 18pt Optima,Arial";
 	context.fillText(nameGene, 30, 25);
 
+	context.font = "bold 16pt Optima,Arial";
+	context.fillText('brin '+sens,30,65);
+
 }
 
 
@@ -89,7 +92,7 @@ function infosSignal(startGene,endGene,state,coord1,coord2) {
 	var lengthSig = coord2-coord1,
 	lengthGene = endGene-startGene,
 	normFactor = 1000 / (2000 + lengthGene),
-	y = 200
+	y = 300
 
 	var canvas = document.getElementById("canvas"),
 	context = canvas.getContext('2d');
@@ -100,7 +103,7 @@ function infosSignal(startGene,endGene,state,coord1,coord2) {
 	if (coord1 < startGene) {
 
 		var start = startGene - coord1,
-		startSign = 100+ (1000-start) *normFactor,
+		startSign = 100+ (1000-start) * normFactor,
 		endSign = startSign + lengthSig * normFactor;
 
 	} else {
@@ -119,12 +122,12 @@ function infosSignal(startGene,endGene,state,coord1,coord2) {
 	if (results[state][7] == "over") {
 
 		context.fillStyle = state_to_color[state];
-		context.fillRect(startSign,state_to_y[state],endSign - startSign,5)
+		context.fillRect(startSign,100+state_to_y[state],endSign - startSign,5)
 
 	} else {
 
 		context.strokeStyle = state_to_color[state];
-		context.strokeRect(startSign,state_to_y[state],endSign - startSign,5)
+		context.strokeRect(startSign,100+state_to_y[state],endSign - startSign,5)
 	}
 	// context.moveTo(startSign, state_to_y[state]);  // 1er point
 	// context.lineTo(endSign, state_to_y[state]); // 2e point
@@ -133,14 +136,14 @@ function infosSignal(startGene,endGene,state,coord1,coord2) {
 
 	context.font = "bold 8pt Optima,Arial";
 	context.fillStyle = "black";
-	context.fillText(state, (startSign+endSign-10)/2, state_to_y[state]+15);
+	context.fillText(state, (startSign+endSign-10)/2, 100+state_to_y[state]+15);
 
 }
 
 function makeLegend(states) {
 
-	var y = 700;
-	var yB = 700;
+	var y = 800;
+	var yB = 800;
 
 	var canvas = document.getElementById("canvas"),
 	context = canvas.getContext('2d');
@@ -149,16 +152,16 @@ function makeLegend(states) {
 
 	context.lineWidth = 3;
 
-	context.strokeRect(200, 630, 100, 10);
+	context.strokeRect(200, 730, 100, 10);
 
 	context.font = "bold 18pt Optima,Arial";
 
 	rect = new Path2D();
-	rect.rect(200, 600, 100, 10);
+	rect.rect(200, 700, 100, 10);
 
 
-	context.fillText("state over",320,610)
-	context.fillText("state under",320,640)
+	context.fillText("state over",320,710)
+	context.fillText("state under",320,740)
 	context.fill(rect);
 
 
@@ -225,7 +228,8 @@ function retrieveCoordinates(gene,id) {
 				var nameGene = id;
 			}
 			var length_gene = gene[i][5]-gene[i][4];
-			infosGene(nameGene,length_gene,gene[i][4],gene[i][5]);
+
+			infosGene(nameGene,length_gene,gene[i][4],gene[i][5],gene[i][6]);
 
 		// Les autres lignes donnent accès aux informations des différentes 
 		// marques épigénétiques.

@@ -25,8 +25,9 @@ palf <- colorRampPalette(c("white", "dark red"))
 
 
 
-png(filename="images/matrix.png",width = 1200, height = 800)
+png(filename="images/matrix.png",height=800,width=1000,res=120)
 heatmap(netm, Rowv = NA, Colv = NA, col = palf(100), 
         
         scale="none", margins=c(10,10) )
 dev.off()
+

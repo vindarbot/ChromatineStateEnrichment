@@ -1,17 +1,32 @@
+library(tidyverse)
+library(igraph)
+library(ggplot2)
 dir <- rstudioapi::getSourceEditorContext()$path
 
 setwd('~/Desktop/Chromatine_states/')
-matrix <- read.csv('results/matrix.txt',sep="\t", head=T)
+matrix <- read.csv('results/matrix.txt',sep="\t",head=T)
 
 
-matrix['X1']
+matrix <- matrix[,1:ncol(matrix)-1]
 
-for (i in 1:36) {
-  print(sum(matrix[i]))
-}
-sum(matrix['X1'])
+names <- combn(names(matrix[-1]), 2)
+
+freq <- combn(matrix[-1], 2, function(x) sum(x[1] * x[2]))
+
+matrix_adj <- data.frame(col1 = names[1,], col2 = names[2,], freq = freq)
+
+graph.adjacency(matrix_adj, mode="undirected", weighted=NULL)
+
+g <- graph.data.frame(matrix_adj)
+
+netm <- get.adjacency(g,attr='freq',sparse = F)
+
+palf <- colorRampPalette(c("white", "dark red")) 
 
 
-for (i in 1:36) {
-  print(as.integer(i))
-}
+
+png(filename="images/matrix.png",width = 1200, height = 800)
+heatmap(netm, Rowv = NA, Colv = NA, col = palf(100), 
+        
+        scale="none", margins=c(10,10) )
+dev.off()

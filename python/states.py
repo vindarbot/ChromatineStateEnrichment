@@ -158,7 +158,7 @@ with tag('html'):
 
 							text(head)
 
-				count = 0
+				
 
 				for gene in state_to_gene[state]:
 
@@ -173,8 +173,9 @@ with tag('html'):
 
 								with tag('td', klass='states'):
 
-									with tag('a',real='external',href='genes.html#value='+gene[i], klass='links', id="gene_"+str(count)):
-
+									with tag('a',real='external',href='genes.html#value='+gene[i], klass='links'): 
+									# Permet de passer l'identifiant TAIR du gène cliqué dans l'URL, afin de le récupérer dansw la page gene.html,
+									# Afin de placer le gène en question comme valeur par défault pour le formulaire.
 										text(gene[i])
 
 							else:
@@ -184,7 +185,7 @@ with tag('html'):
 						
 
 									text(gene[i])
-					count += 1
+					
 
 		doc.asis("<script type='text/javascript' src='../javascript/states.js'></script>")
 

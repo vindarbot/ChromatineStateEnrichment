@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import scipy.stats as stats
+from statsmodels.sandbox.stats.multicomp import multipletests
 import sys
 import os
 import argparse
@@ -154,6 +155,12 @@ def counting_target_per_state(genes,states):
 
 
 
+def bonferroni_correction(pvalues, seuil):
+
+	p_adjusted = multipletests(pvalues, method='bonferroni', alpha=0.01)
+
+	return list(list(p_adjusted)[1])
+
 
 def running_stat_part(target_background, genes_input, target_input):
 	''' Test de fisher exact entre le rapport du nombre total de gènes chez Arabidopsis
@@ -166,20 +173,34 @@ def running_stat_part(target_background, genes_input, target_input):
 	state_results = {}
 	# Pour les states en question (utile pour le random samplempling quand on s'intéresse qu'à la liste
 	# des states significatifs.)
+	to_adj = []
+
 	for state in list(target_background.keys()):
 
 
 			# On récupère le ratio rapport attendu/rapport de la liste fournit, ainsi que la p-value
 			# associé au test de fisher
-			oddsratio, pvalue = stats.fisher_exact([[len_genes_background,
+
+		oddsratio, pvalue = stats.fisher_exact([[len_genes_background,
 				target_background[state]], [len(genes_input), len(target_input[state])]])
 
-			pvalue = rounding(pvalue)
-			oddsratio = round(oddsratio,2)
+		pvalue = rounding(pvalue)
+		to_adj.append(pvalue)
 
-			state_results[state] = [pvalue,oddsratio,len_genes_background,
-				target_background[state],len(genes_input),
-				len(target_input[state]),state_to_name[state]]
+		oddsratio = round(oddsratio,2)
+
+		state_results[state] = [pvalue,oddsratio,len_genes_background,
+			target_background[state],len(genes_input),
+			len(target_input[state]),state_to_name[state]]
+
+	padj = bonferroni_correction(to_adj,args.pvalue)
+
+	count = 0
+
+	for state in list(target_background.keys()):
+
+		state_results[state][0] = rounding(padj[count])
+		count += 1
 
 	return state_results
 
@@ -192,15 +213,15 @@ def retrieve_significative_states(results,target_input):
 	# Pour l'ensemble des states
 	for state in range(1,37):
 		# On récupère la p-value et le ratio
-		pvalue = results[state][0]
+		padj = results[state][0]
 		oddsratio = results[state][1]
 		# Si la p-value est significative (cf p-value fournit par l'utilisateur, défault = 0.01)
 		# Et le rapport inférieur à 1 (RNombre de gènes de la liste ciblé inférieur à celui attendu) )
-		if pvalue < args.pvalue and oddsratio < 1:
+		if padj < args.pvalue and oddsratio < 1:
 
 			results[state].append("under")
 		# Sinon si la p-value est sign et le rapport supérieur à 1
-		elif pvalue < args.pvalue and  oddsratio > 1:
+		elif padj < args.pvalue and  oddsratio > 1:
 
 			results[state].append("over")
 		# Sinon, si la p-value de la chromatine state n'est pas signifciative, on supprime la state des

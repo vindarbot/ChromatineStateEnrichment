@@ -1,12 +1,11 @@
-// if (coordinates['AT1G071600']) {
-// 	alert("blabla")
-// } AT2G05518
 
-function getValueForm() {
-	// Fonction qui peremt de récupérer le gène cliqué par l'utilisateur sur une page
+function generateCanvas() {
+
+	// Fonction qui peret de récupérer le gène cliqué par l'utilisateur sur une page
 	// state.html, pour y mettre en valeur par défault dans le formulaire (genes.html)
 	// Si ce n'est pas le cas, l'utilisateur est arrivé sur la page via le menu. (pas
 	// de valeur par défault.)
+
 	var form = document.getElementById('gene_input'),
 	send = document.getElementById("submit_gene");
 
@@ -142,8 +141,8 @@ function infosSignal(startGene,endGene,state,coord1,coord2) {
 
 function makeLegend(states) {
 
-	var y = 800;
-	var yB = 800;
+	var y = 1000;
+	var yB = 1000;
 
 	var canvas = document.getElementById("canvas"),
 	context = canvas.getContext('2d');
@@ -152,16 +151,16 @@ function makeLegend(states) {
 
 	context.lineWidth = 3;
 
-	context.strokeRect(200, 730, 100, 10);
+	context.strokeRect(200, 930, 100, 10);
 
 	context.font = "bold 18pt Optima,Arial";
 
 	rect = new Path2D();
-	rect.rect(200, 700, 100, 10);
+	rect.rect(200, 900, 100, 10);
 
 
-	context.fillText("state over",320,710)
-	context.fillText("state under",320,740)
+	context.fillText("state over",320,910)
+	context.fillText("state under",320,940)
 	context.fill(rect);
 
 
@@ -204,6 +203,7 @@ function makeLegend(states) {
 
 
 function resetScale() {
+	// Pour annuler le canvas en cours si l'utilisateur entre un autre gène.
 
 	var canvas = document.getElementById("canvas"),
 	context = canvas.getContext('2d');
@@ -252,12 +252,7 @@ function retrieveCoordinates(gene,id) {
 	makeLegend(states);
 }
 
-// var duplicatedArray = [1, 2, 3, 4, 5, 1, 1, 1, 2, 3, 4];
-// var uniqueArray = Array.from(new Set(duplicatedArray));
-
-
-
-getValueForm()
+generateCanvas()
 
 
 

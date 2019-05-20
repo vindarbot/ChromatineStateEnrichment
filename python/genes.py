@@ -82,11 +82,9 @@ with tag('html'):
 				doc.stag("input", type='submit', value='Envoyer',name='submit_gene', id='submit_gene')
 
 
-		with tag('canvas',id="canvas",width="2400", height="1600"):
+		with tag('canvas',id="canvas_gene",width="2400", height="1600"):
 
 			text("Désolé, votre navigateur ne supporte pas Canvas. Mettez-vous à jour.")
-
-		doc.asis("<script type='text/javascript' src='../javascript/states.js'></script>")
 
 		doc.asis("<script type='text/javascript' src='../javascript/coordinates.js'></script>")
 

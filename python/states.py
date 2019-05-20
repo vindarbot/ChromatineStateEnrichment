@@ -35,7 +35,16 @@ with tag('html'):
 
 			text(name)
 
+		doc.stag('link', rel='stylesheet', type='text/css', href='../javascript/DataTables/datatables.css')
 		
+		doc.asis("<script type='text/javascript' charset='utf-8' src ='../javascript/DataTables/datatables.js'></script>")
+
+		with tag('script'):
+
+			text(''' 
+					$(document).ready( function () {
+   						$('#table_states').DataTable();
+						} );''')
 
 
 
@@ -146,7 +155,7 @@ with tag('html'):
 
 		with tag('section', klass='table'):
 
-			with tag("table"):
+			with tag("table", id="table_states"):
 
 				with tag('tr'):
 

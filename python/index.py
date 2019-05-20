@@ -29,18 +29,21 @@ with tag('html'):
 
 			text(name)
 
-		doc.stag('link', rel='stylesheet', type='text/css', href='../javascript/DataTables/datatables.min.css')
+		doc.stag('link', rel='stylesheet', type='text/css', href='../javascript/DataTables/datatables.css')
 		
-		doc.stag('script', type='text/javascript', src ='../javascript/DataTables/datatables.min.js')
+		doc.asis("<script type='text/javascript' charset='utf-8' src ='../javascript/DataTables/datatables.js'></script>")
 
 		with tag('script'):
 
 			text(''' 
 					$(document).ready( function () {
-   						$('#example').DataTable();
-						} );)''')
-		
+   						$('#main_results').DataTable( {
+   						"order": [[ 3, "desc" ]]
 
+   						} );
+
+						} );''')
+		
 
 
 
@@ -83,7 +86,7 @@ with tag('html'):
 
 
 
-
+		doc.asis('<br> <br> <br>')
 
 		with tag('section', klass='table'):
 

@@ -12,11 +12,17 @@ from collections import defaultdict
 from state_to_name import state_to_name
 from  At_all_genes import At_all_genes
 
+###
+
+dirname = os.path.dirname
+CSE_PATH = dirname(dirname(os.path.realpath(__file__)))
+
+##
+
 parser = argparse.ArgumentParser(description='test of overrepresentation of\
 	chromatin state in a list of specific genes\n\n\
 	Exemple: python3 fisher_chrState.py 3 DEG/Col_ColHS/id.txt',
 	formatter_class=RawTextHelpFormatter)
-
 
 parser.add_argument("--state",action='store_true',
 	help="having state name from state number\n")

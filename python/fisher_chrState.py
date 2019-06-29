@@ -141,7 +141,7 @@ def counting_target_per_state(genes,states):
 
 	# Fichier At_genes_states.txt, 1ère colonne le numéro du chromartine state, 2ème colonne id des gènes ciblés
 	# par le chromatine state.
-	with open("data/At_genes_states.txt","r") as file:
+	with open(CSE_PATH+"/data/At_genes_states.txt","r") as file:
 
 		for ligne in file.readlines():
 
@@ -263,7 +263,7 @@ def retrieve_coordinates(gene_to_states, signif_states):
 
 	coordinates_genes = defaultdict(list)
 	# Le fichier At_segments_states.txt comprend tous les signaux associés à chaque chromatine state.
-	file1 = open("data/At_segments_states.txt")
+	file1 = open(CSE_PATH+"/data/At_segments_states.txt")
 
 	lignes = file1.readlines()
 	# On formate la 4ème colonne (ligne.split()[3]) pour enlever le "E" devant le nuémro du chromatine state
@@ -271,7 +271,7 @@ def retrieve_coordinates(gene_to_states, signif_states):
 	lignes = [ligne for ligne in lignes if int(ligne.split()[3].lstrip("E")) in signif_states]
 
 
-	with open("data/At_genes_states.txt","r") as file:
+	with open(CSE_PATH+"/data/At_genes_states.txt","r") as file:
 
 		for ligne in file.readlines():
 
@@ -412,27 +412,31 @@ def write_output(name, outdir, signifs, gene_states, coordinates, target_input):
 
 
 
-	with open("python/name.py","w") as file:
+	with open(CSE_PATH+"/python/name.py","w") as file:
 
 		file.write("name = '"+name+"'")
 
-	with open("javascript/coordinates.js","w") as file:
+	with open(CSE_PATH+"/javascript/coordinates.js","w") as file:
 
 		file.write("coordinates = "+str(coordinates))
 
-	with open("python/state_to_gene.py","w") as file:
+	with open(CSE_PATH+"/python/coordinates.py","w") as file:
+
+		file.write("coordinates = "+str(coordinates))
+
+	with open(CSE_PATH+"/python/state_to_gene.py","w") as file:
 
 		file.write("state_to_gene = "+str(target_input))
 
-	with open("python/results.py","w") as file:
+	with open(CSE_PATH+"/python/results.py","w") as file:
 
 		file.write("results = "+str(signifs))
 
-	with open("javascript/results.js","w") as file:
+	with open(CSE_PATH+"/javascript/results.js","w") as file:
 
 		file.write("results = "+str(signifs))
 
-	with open('python/gene_to_states.py','w') as file:
+	with open(CSE_PATH+"/python/gene_to_states.py",'w') as file:
 
 		file.write('gene_to_states ='+str(dict(gene_states)))
 
@@ -476,11 +480,11 @@ write_output(name, args.output, final_results, gene_to_states, coordinates, inpu
 
 
 
-os.system("python3 python/matrix.py")
+os.system("python3 "+CSE_PATH+"/python/matrix.py")
 
-os.system("Rscript R/matrix_states.R")
+os.system("Rscript "+CSE_PATH+"/R/matrix_states.R")
 
-os.system("python3 python/index.py")
+os.system("python3 "+CSE_PATH+"/python/index.py")
 
 
 
@@ -488,9 +492,9 @@ from state_to_gene import state_to_gene
 
 for state in state_to_gene.keys():
 
-	os.system("python3 python/states.py --state "+str(state)+"")
+	os.system("python3 "+CSE_PATH+"/python/states.py --state "+str(state)+"")
 
-os.system("python3 python/genes.py")
+os.system("python3 "+CSE_PATH+"/python/genes.py")
 
 
 

@@ -11,6 +11,14 @@ from results import results
 from decimal import *
 import argparse
 
+
+###
+
+dirname = os.path.dirname
+CSE_PATH = dirname(dirname(os.path.realpath(__file__)))
+
+##
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument("--state",action='store')
@@ -35,9 +43,9 @@ with tag('html'):
 
 			text(name)
 
-		doc.stag('link', rel='stylesheet', type='text/css', href='../javascript/DataTables/datatables.css')
+		doc.stag('link', rel='stylesheet', type='text/css', href=CSE_PATH+"/javascript/DataTables/datatables.css")
 		
-		doc.asis("<script type='text/javascript' charset='utf-8' src ='../javascript/DataTables/datatables.js'></script>")
+		doc.asis("<script type='text/javascript' charset='utf-8' src ="+CSE_PATH+"/javascript/DataTables/datatables.js'></script>")
 
 		with tag('script'):
 
@@ -196,11 +204,11 @@ with tag('html'):
 									text(gene[i])
 					
 
-		doc.asis("<script type='text/javascript' src='../javascript/states.js'></script>")
+		doc.asis("<script type='text/javascript' src="+CSE_PATH+"javascript/states.js'></script>")
 
 result = doc.getvalue()
 
-with open('html/states_'+str(state)+'.html', "w") as file:
+with open(CSE_PATH+"/html/states_"+str(state)+'.html', "w") as file:
     file.write(result)
 
 

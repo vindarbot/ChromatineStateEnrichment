@@ -11,6 +11,13 @@ from results import results
 from decimal import *
 
 
+###
+
+dirname = os.path.dirname
+CSE_PATH = dirname(dirname(os.path.realpath(__file__)))
+
+##
+
 
 doc, tag, text = Doc().tagtext()
 
@@ -86,18 +93,18 @@ with tag('html'):
 
 			text("Désolé, votre navigateur ne supporte pas Canvas. Mettez-vous à jour.")
 
-		doc.asis("<script type='text/javascript' src='../javascript/coordinates.js'></script>")
+		doc.asis("<script type='text/javascript' src='"+CSE_PATH+"/javascript/coordinates.js'></script>")
 
-		doc.asis("<script type='text/javascript' src='../javascript/results.js'></script>")
+		doc.asis("<script type='text/javascript' src='"+CSE_PATH+"/javascript/results.js'></script>")
 		
-		doc.asis("<script type='text/javascript' src='../javascript/infos_states.js'></script>")
+		doc.asis("<script type='text/javascript' src='"+CSE_PATH+"/javascript/infos_states.js'></script>")
 
-		doc.asis("<script type='text/javascript' src='../javascript/genes.js'></script>")
+		doc.asis("<script type='text/javascript' src='"+CSE_PATH+"/javascript/genes.js'></script>")
 
 
 
 
 result = doc.getvalue()
 
-with open('html/genes.html', "w") as file:
+with open(CSE_PATH+"/html/genes.html", "w") as file:
     file.write(result)

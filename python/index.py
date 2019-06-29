@@ -11,6 +11,12 @@ from results import results
 from decimal import *
 
 
+###
+
+dirname = os.path.dirname
+CSE_PATH = dirname(dirname(os.path.realpath(__file__)))
+
+##
 
 
 doc, tag, text = Doc().tagtext()
@@ -29,9 +35,9 @@ with tag('html'):
 
 			text(name)
 
-		doc.stag('link', rel='stylesheet', type='text/css', href='../javascript/DataTables/datatables.css')
+		doc.stag('link', rel='stylesheet', type='text/css', href=CSE_PATH+"/javascript/DataTables/datatables.css")
 		
-		doc.asis("<script type='text/javascript' charset='utf-8' src ='../javascript/DataTables/datatables.js'></script>")
+		doc.asis("<script type='text/javascript' charset='utf-8' src ='"+CSE_PATH+"/javascript/DataTables/datatables.js'></script>")
 
 		with tag('script'):
 
@@ -142,7 +148,7 @@ with tag('html'):
 
 											text(infos[i])
 
-		doc.stag('img',src='../images/matrix.png',klass='matrix')
+		doc.stag('img',src=CSE_PATH+"/images/matrix.png",klass='matrix')
 
 
 
@@ -151,5 +157,5 @@ with tag('html'):
 
 result = doc.getvalue()
 
-with open('html/index.html', "w") as file:
+with open(CSE_PATH+"/html/index.html", "w") as file:
     file.write(result)

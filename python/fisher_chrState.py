@@ -83,7 +83,7 @@ state	Preferential Epigenetics Marks		Preferential location\n\
 
 ### Variables
 
-
+cut_padj = float(args.pvalue)
 
 
 
@@ -223,11 +223,11 @@ def retrieve_significative_states(results,target_input):
 		oddsratio = results[state][1]
 		# Si la p-value est significative (cf p-value fournit par l'utilisateur, défault = 0.01)
 		# Et le rapport inférieur à 1 (RNombre de gènes de la liste ciblé inférieur à celui attendu) )
-		if padj < args.pvalue and oddsratio < 1:
+		if padj < cut_padj and oddsratio < 1:
 
 			results[state].append("under")
 		# Sinon si la p-value est sign et le rapport supérieur à 1
-		elif padj < args.pvalue and  oddsratio > 1:
+		elif padj < cut_padj and  oddsratio > 1:
 
 			results[state].append("over")
 		# Sinon, si la p-value de la chromatine state n'est pas signifciative, on supprime la state des

@@ -2,7 +2,7 @@ library(tidyverse)
 library(igraph)
 library(ggplot2)
 
-matrix <- read.csv('results/matrix.txt',sep="\t",head=T)
+matrix <- read.csv('matrix.txt',sep="\t",head=T)
 
 
 matrix <- matrix[,1:ncol(matrix)-1]

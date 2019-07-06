@@ -5,6 +5,7 @@ from gene_to_states import gene_to_states
 from state_to_gene import state_to_gene
 from state_to_name import state_to_name
 
+dirname = os.path.dirname
 CSE_PATH = dirname(dirname(os.path.realpath(__file__)))
 
 with open(CSE_PATH+'/R/matrix.txt','w') as file:

@@ -494,6 +494,8 @@ for state in state_to_gene.keys():
 
 	os.system("python3 "+CSE_PATH+"/python/states.py --state "+str(state)+"")
 
+	os.system("python3 "+CSE_PATH+"/python/show_state_to_genes.py --state "+str(state)+"")
+
 os.system("python3 "+CSE_PATH+"/python/genes.py")
 
 

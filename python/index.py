@@ -136,7 +136,15 @@ with tag('html'):
 
 							for i in range(len(infos)):
 
-									if infos[7] == 'over':
+									if i == 5:
+
+										with tag('td'):
+
+											with tag('a', rel='external', href='state_to_genes'+str(state)+'.html',title = 'To see the genes associated with the state'):
+
+												text(infos[i])
+
+									elif infos[7] == 'over':
 
 										with tag('td', klass='over'):
 
@@ -150,6 +158,7 @@ with tag('html'):
 
 		doc.stag('img',src=CSE_PATH+"/images/matrix.png",klass='matrix')
 
+		doc.asis("<script type='text/javascript' src='"+CSE_PATH+"/javascript/show_state_to_genes.js'></script>")
 
 
 

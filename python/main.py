@@ -18,4 +18,6 @@ for state in state_to_gene.keys():
 
 	os.system("python3 python/states.py --state "+str(state)+"")
 
+	os.system("python3 python/show_state_to_genes.py --state "+str(state)+"")
+
 os.system("python3 python/genes.py")

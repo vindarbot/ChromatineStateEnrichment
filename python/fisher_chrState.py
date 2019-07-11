@@ -93,10 +93,11 @@ def rounding(chiffre):
 
 	if re.search("e",str(chiffre)):
 
-		start = re.compile("[0-9][.][0-9]{2}")
+		start = re.compile("[0-9][.][0-9]{1,2}")
 		end = re.compile("e-[0-9]+")
 
 		return float("".join(start.findall(str(chiffre))+end.findall(str(chiffre))))
+
 
 	elif re.search("[0][.][0]{2}",str(chiffre)):
 

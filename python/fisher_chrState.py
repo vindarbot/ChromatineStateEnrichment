@@ -91,11 +91,11 @@ cut_padj = float(args.pvalue)
 
 def rounding(chiffre):
 
-	if re.search("e",str(chiffre)):
+	if re.search("^[0-9]{1}[.][0-9]+e",str(chiffre)):
 
 		start = re.compile("[0-9][.][0-9]{1,2}")
 		end = re.compile("e-[0-9]+")
-
+		print(chiffre)
 		return float("".join(start.findall(str(chiffre))+end.findall(str(chiffre))))
 
 
@@ -106,7 +106,6 @@ def rounding(chiffre):
 		return float("".join(motif.findall(str(chiffre))))
 
 	else:
-
 		return chiffre
 
 

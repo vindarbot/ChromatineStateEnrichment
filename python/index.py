@@ -102,9 +102,9 @@ with tag('html'):
 
 					with tag('tr'):
 
-						header = ("State","Pvalue ajustée (input)","Oddsratio",
-							"Nombre de gènes total (background)","Nombre de gènes totale ciblés  ",
-							"Nombre de gènes input","Nombre de gènes input ciblés","Description","Sens","Pvalue ajustée (random sampling) ")
+						header = ("State","Pvalue ajustée","Oddsratio",
+							"Nombre de gènes total (background)","Nombre de gènes total ciblés  ",
+							"Nombre de gènes entrés","Nombre de gènes entrés ciblés","Description","Sens","Pvalue ajustée (random sampling) ")
 
 						for head in header:
 

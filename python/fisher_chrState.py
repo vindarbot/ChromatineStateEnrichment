@@ -7,6 +7,7 @@ import os
 import argparse
 import re
 import random
+import pandas as pd
 from argparse import RawTextHelpFormatter
 from collections import defaultdict
 from state_to_name import state_to_name
@@ -398,17 +399,73 @@ def write_output(name, outdir, signifs, gene_states, coordinates, target_input):
 
 	with open(outdir+"state_to_genes.txt","w") as file:
 
+		maxi = 0
+
+		for state, genes in target_input.items():
+
+			if len(genes) > maxi:
+
+				maxi = len(genes)
+
+
+
 		for state,genes in target_input.items():
 
-			file.write(str(state)+"\t")
+			if len(genes) > 0:
 
-			for gene in genes:
+				file.write(str(state)+"\t")
 
-				for info in gene:
+				i = 0
 
-					file.write(info+"\t")
+				for gene in genes:
 
-			file.write("\n")
+					i += 1
+
+					if i < len(genes):
+
+						file.write(gene[0]+"\t")
+
+					else:
+
+						file.write(gene[0])
+
+				if i == len(genes):
+
+					while i < maxi:
+
+						i+=1
+
+						file.write(" \t")
+
+
+				file.write("\n")
+
+
+	df = pd.read_table(outdir+"state_to_genes.txt",sep="\t")
+
+	df = df.transpose()
+
+	
+	df.to_csv(outdir+"state_to_genes.txt", sep="\t")
+
+	os.system('tail -n +2 '+outdir+"/state_to_genes.txt > "+outdir+"/state_to_genes.txt_ && mv "+outdir+"/state_to_genes.txt_ "+outdir+"/state_to_genes.txt" )
+
+	os.system('head -n -1 '+outdir+"/state_to_genes.txt > "+outdir+"/state_to_genes.txt_ && mv "+outdir+"/state_to_genes.txt_ "+outdir+"/state_to_genes.txt" )
+
+
+		# for state,genes in target_input.items():
+
+		# 	file.write(str(state)+"\t")
+
+		# 	for gene in genes:
+
+		# 		for info in gene:
+
+		# 			print(info)
+
+		# 			file.write(info+"\t")
+
+		# 	file.write("\n")
 
 
 

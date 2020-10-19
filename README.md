@@ -17,6 +17,7 @@ Download the tool
 Download associated packages
 
 > pip3 install statsmodels
+
 > pip3 install yattag
 
 ## Utilisation

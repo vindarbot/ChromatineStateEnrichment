@@ -25,10 +25,11 @@ Download associated packages
 List of genes as input must be a list of A. thaliana genes in the TAIR ID format, with one gene par line :
 
 AT1G01010
+
 AT1G01020
+
 AT1G01030
-AT1G01040
-AT1G01046
+
 ...
 
 To run the analysis:

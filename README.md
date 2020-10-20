@@ -4,7 +4,7 @@ With a list of Arabidopsis thaliana genes as input (TAIR ID format), the tool CS
 
 The 36 epigenetics marks and the genes associated were described by Liu Y., et al. (PCSD: a plant chromatin state database. Nucleic Acids Research, Volume 46, Issue D1, 4 January 2018, Pages D1157–D1167, https://doi.org/10.1093/nar/gkx919)
 
-The first step of CSE performs statistical tests (Fisher's exact test). The second part allows the user to visualize the location of the enriched marks inside the genes given as input.
+Firstly, CSE performs statistical tests (Fisher's exact test). The second part allows the user to visualize the location of the enriched marks inside the genes given as input.
 
 The tool is a part of RNA-Seq pipeline (https://github.com/Darbinator/RNA_Seq_Pipeline) which also allows to identify differently expressed genes (DEG), and differentially alternatively spliced genes (DSAG), from RNA_Seq data. CSE is in this case execute with the list of DEG.
 
